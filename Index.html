@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERRA · modern coastal dining</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 🎨 NON-BLACK / NON-GOLD color system – organic & airy */
+        :root {
+            --deep-teal: #1F6C7A;        /* ocean depth */
+            --ocean-blue: #368796;        /* vibrant accent */
+            --soft-cream: #FCF9F3;        /* background warmth */
+            --terracotta: #D47B5A;         /* earthy highlight */
+            --sage-green: #7F9A85;         ·* subtle freshness */
+            --wood-light: #EADBCF;         /* natural texture */
+            --wood-medium: #CBB5A2;        /* deeper wood */
+            --cream-dark: #F0E4D5;          /* for cards */
+            --text-dark: #2D4A4F;           /* deep teal for text */
+            --text-soft: #5D6E6B;            /* softer sage */
+            --shadow: 0 20px 30px -10px rgba(45, 74, 79, 0.1);
+        }
+
+        body {
+            background-color: var(--soft-cream);
+            color: var(--text-dark);
+            font-family: "Inter", sans-serif;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: "Playfair Display", serif;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 2.5rem;
+            color: var(--deep-teal);
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: var(--terracotta);
+        }
+
+        /* ███████ HERO ███████ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background-color: var(--wood-light);
+            overflow: hidden;
+        }
+
+        /* floating spices / ingredients – 3D-ish animation */
+        .floating-ingredients {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .ingredient {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: rgba(214, 123, 90, 0.15);
+            backdrop-filter: blur(2px);
+            border-radius: 60% 40% 70% 30%;
+            transform: rotate(10deg);
+            box-shadow: inset 0 0 15px rgba(255,255,240,0.4);
+            animation: float 20s infinite ease-in-out;
+        }
+        .ingredient:nth-child(1) { top: 15%; left: 10%; background: var(--terracotta); opacity: 0.2; width: 100px; height: 100px; animation-duration: 24s; }
+        .ingredient:nth-child(2) { top: 60%; right: 15%; background: var(--sage-green); opacity: 0.15; width: 140px; height: 140px; border-radius: 40% 60% 30% 70%; animation-duration: 30s; }
+        .ingredient:nth-child(3) { bottom: 20%; left: 20%; background: var(--deep-teal); opacity: 0.1; width: 180px; height: 180px; border-radius: 70% 30% 50% 50%; animation-duration: 28s; }
+        .ingredient:nth-child(4) { top: 30%; right: 25%; background: var(--ocean-blue); opacity: 0.12; width: 90px; height: 90px; animation-duration: 18s; }
+        .ingredient:nth-child(5) { bottom: 40%; left: 70%; background: #c9ab84; opacity: 0.2; width: 120px; height: 120px; animation-duration: 22s; }
+        .ingredient i { font-size: 2rem; color: rgba(255,255,240,0.3); position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-30px) rotate(10deg) scale(1.05); }
+            100% { transform: translateY(0px) rotate(0deg) scale(1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            padding: 2rem;
+            background: rgba(252, 249, 243, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 40px;
+            box-shadow: var(--shadow);
+        }
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            color: var(--deep-teal);
+            line-height: 1.1;
+        }
+        .hero p {
+            font-size: 1.3rem;
+            margin: 2rem 0;
+            color: var(--text-soft);
+        }
+        .btn-group {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 1rem 2.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            border: 2px solid transparent;
+            font-size: 1.1rem;
+        }
+        .btn-primary {
+            background: var(--deep-teal);
+            color: white;
+            box-shadow: 0 8px 18px rgba(31, 108, 122, 0.2);
+        }
+        .btn-primary:hover {
+            background: transparent;
+            border-color: var(--deep-teal);
+            color: var(--deep-teal);
+        }
+        .btn-outline {
+            border: 2px solid var(--deep-teal);
+            color: var(--deep-teal);
+        }
+        .btn-outline:hover {
+            background: var(--deep-teal);
+            color: white;
+        }
+
+        /* ███████ STORY ███████ */
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .story-image {
+            background: var(--wood-medium);
+            height: 400px;
+            border-radius: 30px;
+            background-image: url('https://images.unsplash.com/photo-1600565193348-f74bd3c7ccdf?w=600&auto=format');
+            background-size: cover;
+            background-position: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.4s;
+        }
+        .story-image:hover {
+            transform: scale(1.02);
+        }
+        .story-text p {
+            font-size: 1.2rem;
+            color: var(--text-soft);
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--terracotta);
+            padding-left: 1.5rem;
+        }
+
+        /* ███████ DYNAMIC MENU ███████ */
+        .menu-categories {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 2.5rem 0 2rem;
+        }
+        .cat-btn {
+            padding: 0.7rem 2rem;
+            border: 1px solid var(--sage-green);
+            background: transparent;
+            border-radius: 40px;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .cat-btn.active, .cat-btn:hover {
+            background: var(--sage-green);
+            color: white;
+            border-color: var(--sage-green);
+        }
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .dish-card {
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(127, 154, 133, 0.1);
+        }
+        .dish-card:hover {
+            transform: scale(1.03) translateY(-8px);
+            box-shadow: 0 30px 40px -10px rgba(31, 108, 122, 0.25);
+        }
+        .dish-img {
+            height: 200px;
+            background-color: var(--wood-light);
+            background-size: cover;
+            background-position: center;
+            transition: 0.4s;
+        }
+        .dish-card:hover .dish-img {
+            filter: brightness(1.05) saturate(1.1);
+        }
+        .dish-info {
+            padding: 1.8rem 1.5rem;
+        }
+        .dish-info h3 {
+            font-size: 1.7rem;
+            color: var(--deep-teal);
+        }
+        .dish-info p {
+            color: var(--text-soft);
+            margin: 0.5rem 0 1rem;
+        }
+        .price {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--terracotta);
+        }
+
+        /* ███████ SIGNATURE DISH (3D FLIP) ███████ */
+        .signature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        .flip-card {
+            background-color: transparent;
+            height: 380px;
+            perspective: 2000px;
+        }
+        .flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            border-radius: 30px;
+            box-shadow: var(--shadow);
+        }
+        .flip-card:hover .flip-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-front, .flip-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 30px;
+            padding: 2rem;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .flip-front {
+            background: linear-gradient(145deg, #fff, var(--cream-dark));
+        }
+        .flip-front i {
+            font-size: 5rem;
+            color: var(--terracotta);
+            margin-bottom: 1rem;
+        }
+        .flip-back {
+            background: var(--deep-teal);
+            color: white;
+            transform: rotateY(180deg);
+            text-align: left;
+        }
+        .flip-back h3 { color: white; }
+        .flip-back p { margin: 0.5rem 0; }
+
+        /* ███████ GALLERY / MASONRY ███████ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            grid-auto-rows: 200px;
+        }
+        .gallery-item {
+            background: var(--wood-medium);
+            border-radius: 25px;
+            background-size: cover;
+            background-position: center;
+            transition: 0.3s;
+            box-shadow: var(--shadow);
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+            filter: brightness(1.05);
+        }
+        .item1 { grid-row: span 2; grid-column: span 2; background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&auto=format'); }
+        .item2 { background-image: url('https://images.unsplash.com/photo-1552566626-52f8b828add9?w=600&auto=format'); }
+        .item3 { background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?w=600&auto=format'); }
+        .item4 { grid-row: span 2; background-image: url('https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&auto=format'); }
+        .item5 { grid-column: span 2; background-image: url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&auto=format'); }
+        .item6 { background-image: url('https://images.unsplash.com/photo-1579684947550-22e945225d9a?w=600&auto=format'); }
+
+        /* ███████ TESTIMONIAL CAROUSEL ███████ */
+        .testimonial-scroll {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 2rem 0.5rem;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .testimonial-card {
+            flex: 0 0 350px;
+            background: white;
+            border-radius: 30px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            scroll-snap-align: start;
+            border-left: 6px solid var(--sage-green);
+        }
+        .stars { color: #f4b740; margin: 1rem 0; }
+        .customer { font-weight: 700; color: var(--deep-teal); }
+
+        /* ███████ RESERVATION & CONTACT ███████ */
+        .reservation-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+            background: var(--cream-dark);
+            border-radius: 50px;
+            padding: 3rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 2px solid transparent;
+            border-radius: 60px;
+            font-family: inherit;
+            background: white;
+            transition: 0.2s;
+        }
+        input:focus, select:focus {
+            border-color: var(--terracotta);
+            outline: none;
+        }
+        .reserve-btn {
+            background: var(--terracotta);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            width: 100%;
+        }
+        .contact-details {
+            background: var(--deep-teal);
+            border-radius: 40px;
+            padding: 2rem;
+            color: white;
+        }
+        .contact-details i { margin-right: 0.8rem; color: var(--terracotta); }
+        .map-placeholder {
+            background: var(--sage-green);
+            height: 150px;
+            border-radius: 30px;
+            margin: 1.5rem 0;
+            background-image: url('https://images.unsplash.com/photo-1569336415962-a4bd9f69cdc1?w=600&auto=format');
+            background-size: cover;
+        }
+
+        /* ███████ FOOTER ███████ */
+        footer {
+            background: var(--wood-light);
+            padding: 3rem 2rem 2rem;
+            color: var(--text-dark);
+        }
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 2.5rem;
+        }
+        .newsletter input {
+            border-radius: 60px 0 0 60px;
+            border: none;
+        }
+        .newsletter button {
+            background: var(--deep-teal);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 60px 60px 0;
+            font-weight: 600;
+        }
+        .social i {
+            font-size: 1.6rem;
+            margin-right: 1rem;
+            color: var(--deep-teal);
+        }
+
+        /* mobile */
+        @media (max-width: 900px) {
+            .story-grid, .signature-grid, .reservation-grid, .footer-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: 1fr 1fr; }
+            .hero-content { margin: 1rem; }
+        }
+        @media (max-width: 500px) {
+            .section { padding: 3rem 1rem; }
+            .gallery-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO with floating spices -->
+<section class="hero">
+    <div class="floating-ingredients">
+        <div class="ingredient"></div>
+        <div class="ingredient"></div>
+        <div class="ingredient"></div>
+        <div class="ingredient"></div>
+        <div class="ingredient"></div>
+    </div>
+    <div class="hero-content">
+        <h1>Where Flavor<br>Meets Experience.</h1>
+        <p>Thoughtfully sourced, creatively composed — a dining moment that lingers.</p>
+        <div class="btn-group">
+            <a href="#menu" class="btn btn-primary">Explore Menu</a>
+            <a href="#reservation" class="btn btn-outline">Reserve a Table</a>
+        </div>
+    </div>
+</section>
+
+<!-- STORY section -->
+<section class="section" id="story">
+    <h2 class="section-title">Our story</h2>
+    <div class="story-grid">
+        <div class="story-image"></div>
+        <div class="story-text">
+            <p>We started with a simple belief: the best meals are shared. Terra blends the raw honesty of wood-fired cooking with the elegance of coastal ingredients. Every plate tells a story of the land, the sea, and the hands that prepared it.</p>
+            <p>From our open kitchen to your table, we invite you to slow down, connect, and savor a place where contemporary warmth meets culinary craft.</p>
+        </div>
+    </div>
+</section>
+
+<!-- DYNAMIC MENU section -->
+<section class="section" id="menu">
+    <h2 class="section-title">Seasonal offerings</h2>
+    <div class="menu-categories" id="menuCategories">
+        <button class="cat-btn active" data-cat="all">All</button>
+        <button class="cat-btn" data-cat="small">Small Plates</button>
+        <button class="cat-btn" data-cat="main">Main Dishes</button>
+        <button class="cat-btn" data-cat="dessert">Desserts</button>
+        <button class="cat-btn" data-cat="drink">Signature Drinks</button>
+    </div>
+    <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+<!-- SIGNATURE DISH SHOWCASE (3D flip) -->
+<section class="section">
+    <h2 class="section-title">Signature experience</h2>
+    <div class="signature-grid">
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Wood-fired octopus</h3>
+                    <p>smoked paprika • charred lemon • olive oil</p>
+                </div>
+                <div class="flip-back">
+                    <h3>Wood-fired octopus</h3>
+                    <p>Inspired by Mediterranean coasts, finished with a touch of sage from our garden. Pair with a glass of Albariño.</p>
+                    <p><em>Chef’s note: simplicity, flame, freshness.</em></p>
+                </div>
+            </div>
+        </div>
+        <div class="flip-card">
+            <div class="flip-inner">
+                <div class="flip-front">
+                    <i class="fas fa-wine-glass-alt"></i>
+                    <h3>Seabass & saffron</h3>
+                    <p>saffron broth • heirloom tomatoes • fennel</p>
+                </div>
+                <div class="flip-back">
+                    <h3>Seabass & saffron</h3>
+                    <p>A tribute to the ocean: line-caught seabass, slow-poached in aromatic saffron. Recommended pairing: Chardonnay.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- GALLERY (masonry style) -->
+<section class="section">
+    <h2 class="section-title">Atmosphere</h2>
+    <div class="gallery-grid">
+        <div class="gallery-item item1"></div>
+        <div class="gallery-item item2"></div>
+        <div class="gallery-item item3"></div>
+        <div class="gallery-item item4"></div>
+        <div class="gallery-item item5"></div>
+        <div class="gallery-item item6"></div>
+    </div>
+</section>
+
+<!-- TESTIMONIAL CAROUSEL -->
+<section class="section">
+    <h2 class="section-title">Guest moments</h2>
+    <div class="testimonial-scroll">
+        <div class="testimonial-card"><p>“Unreal flavor combinations. The staff made us feel like old friends.”</p><div class="stars">★★★★★</div><span class="customer">— Morgan L.</span></div>
+        <div class="testimonial-card"><p>“The teal & terracotta interior is stunning. Food even better. Burrata starter is a must.”</p><div class="stars">★★★★★</div><span class="customer">— Casey T.</span></div>
+        <div class="testimonial-card"><p>“Finally a place that feels both luxurious and relaxed. The octopus changed my life.”</p><div class="stars">★★★★★</div><span class="customer">— Samira K.</span></div>
+        <div class="testimonial-card"><p>“Impeccable service, creative drinks, and that sage-green lounge… I’m coming back.”</p><div class="stars">★★★★☆</div><span class="customer">— Jordan M.</span></div>
+    </div>
+</section>
+
+<!-- RESERVATION + CONTACT -->
+<section class="section" id="reservation">
+    <h2 class="section-title">Reserve your table</h2>
+    <div class="reservation-grid">
+        <div>
+            <form id="reservationForm">
+                <div class="form-group"><input type="text" placeholder="Full name" required></div>
+                <div class="form-group"><input type="email" placeholder="Email address" required></div>
+                <div class="form-group"><input type="tel" placeholder="Phone number"></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <input type="number" placeholder="Guests" min="1" max="20">
+                    <input type="date" id="resDate" value="2025-04-15">
+                </div>
+                <div class="form-group"><input type="time" placeholder="Time" value="19:00"></div>
+                <button type="button" class="reserve-btn" onclick="handleReservation()">Complete reservation</button>
+            </form>
+        </div>
+        <div class="contact-details">
+            <h3 style="color:white; margin-bottom:1.5rem;">Visit or call</h3>
+            <p><i class="fas fa-phone-alt"></i> (212) 555-0170</p>
+            <p><i class="fas fa-envelope"></i> hello@terra.nyc</p>
+            <p><i class="fas fa-map-pin"></i> 22 Bleecker St, New York</p>
+            <div class="map-placeholder"></div>
+            <p><i class="fas fa-clock"></i> Open daily 5pm–11pm</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+        <div><h3 style="font-size:2rem; color:var(--deep-teal);">TERRA</h3><p style="margin:1rem 0;">Where flavor meets experience.</p></div>
+        <div><h4>Explore</h4><p>Menu<br>Story<br>Gallery</p></div>
+        <div><h4>Connect</h4><div class="social"><i class="fab fa-instagram"></i><i class="fab fa-facebook"></i><i class="fab fa-x-twitter"></i></div></div>
+        <div class="newsletter"><h4>Seasonal whispers</h4><div style="display: flex;"><input type="email" placeholder="Your email"><button>→</button></div></div>
+    </div>
+    <p style="text-align:center; margin-top:4rem; color:var(--text-soft);">© 2025 TERRA · designed with warm tones</p>
+</footer>
+
+<!-- JavaScript for dynamic menu & reservation alert -->
+<script>
+    // Menu data
+    const menuItems = [
+        { name: "Burrata & heirloom", desc: "creamy burrata, basil, aged balsamic", price: 18, category: "small", img: "https://images.unsplash.com/photo-1582139329536-e7284fece509?w=400&auto=format" },
+        { name: "Octopus skewers", desc: "charred octopus, romesco, almond", price: 22, category: "small", img: "https://images.unsplash.com/photo-1594046243099-0bcee110ccd2?w=400&auto=format" },
+        { name: "Wood-grilled salmon", desc: "fennel, citrus butter, wild rice", price: 34, category: "main", img: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=400&auto=format" },
+        { name: "Saffron seabass", desc: "saffron broth, tomatoes, fingerling", price: 38, category: "main", img: "https://images.unsplash.com/photo-1615141982883-c7ad0e69fd62?w=400&auto=format" },
+        { name: "Olive oil cake", desc: "rosemary, citrus glaze, labneh", price: 14, category: "dessert", img: "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=400&auto=format" },
+        { name: "Dark chocolate tart", desc: "sea salt, olive oil, cacao nibs", price: 16, category: "dessert", img: "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&auto=format" },
+        { name: "Smoked old fashioned", desc: "mezcal, maple, bitters", price: 17, category: "drink", img: "https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=400&auto=format" },
+        { name: "Sage gin fizz", desc: "sage, cucumber, lime", price: 16, category: "drink", img: "https://images.unsplash.com/photo-1551024704-8ec4be393f6a?w=400&auto=format" },
+        { name: "Ribeye med rare", desc: "chimichurri, roasted shallot", price: 48, category: "main", img: "https://images.unsplash.com/photo-1558030006-450675393462?w=400&auto=format" }
+    ];
+
+    function renderMenu(category = "all") {
+        const grid = document.getElementById('menuGrid');
+        const filtered = category === "all" ? menuItems : menuItems.filter(item => item.category === category);
+        grid.innerHTML = filtered.map(item => `
+            <div class="dish-card" data-cat="${item.category}">
+                <div class="dish-img" style="background-image: url('${item.img}');"></div>
+                <div class="dish-info">
+                    <h3>${item.name}</h3>
+                    <p>${item.desc}</p>
+                    <span class="price">$${item.price}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            renderMenu(this.dataset.cat);
+        });
+    });
+
+    renderMenu("all");
+
+    // Reservation simulation
+    function handleReservation() {
+        alert("✨ Thank you! Your reservation request has been sent to TERRA. We'll confirm shortly.");
+    }
+    window.handleReservation = handleReservation;
+
+    // smooth scroll for buttons
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if(target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+
+    // set min date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('resDate')?.setAttribute('min', today);
+</script>
+</body>
+</html>
